@@ -13,31 +13,31 @@ import java.util.List;
 
 public class RNJitsiMeetPackage implements ReactPackage, IRNJitsiMeetViewReference {
 
-    private RNJitsiMeetView mJitsiMeetView = null;
+  private RNJitsiMeetView mJitsiMeetView = null;
 
-    public void setJitsiMeetView(RNJitsiMeetView jitsiMeetView) {
-        mJitsiMeetView = jitsiMeetView;
-    }
+  public void setJitsiMeetView(RNJitsiMeetView jitsiMeetView) {
+    mJitsiMeetView = jitsiMeetView;
+  }
 
-    public RNJitsiMeetView getJitsiMeetView() {
-        return mJitsiMeetView;
-    }
+  public RNJitsiMeetView getJitsiMeetView() {
+    return mJitsiMeetView;
+  }
 
-    @Override
-    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        List<NativeModule> modules = new ArrayList<>();
-        modules.add(new RNJitsiMeetModule(reactContext, this));
-        return modules;
-    }
+  @Override
+  public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+    List<NativeModule> modules = new ArrayList<>();
+    modules.add(new RNJitsiMeetModule(reactContext, this));
+    return modules;
+  }
 
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
-    }
+  public List<Class<? extends JavaScriptModule>> createJSModules() {
+    return Collections.emptyList();
+  }
 
-    @Override
-    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Arrays.<ViewManager>asList(
-                new RNJitsiMeetViewManager(reactContext, this)
-        );
-    }
+  @Override
+  public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+    return Arrays.<ViewManager>asList(
+      new RNJitsiMeetViewManager(reactContext, this)
+    );
+  }
 }

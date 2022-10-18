@@ -18,63 +18,63 @@ import static java.security.AccessController.getContext;
 
 @ReactModule(name = RNJitsiMeetViewManager.REACT_CLASS)
 public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> implements JitsiMeetViewListener {
-    public static final String REACT_CLASS = "RNJitsiMeetView";
-    private IRNJitsiMeetViewReference mJitsiMeetViewReference;
-    private ReactApplicationContext mReactContext;
+  public static final String REACT_CLASS = "RNJitsiMeetView";
+  private IRNJitsiMeetViewReference mJitsiMeetViewReference;
+  private ReactApplicationContext mReactContext;
 
-    public RNJitsiMeetViewManager(ReactApplicationContext reactContext, IRNJitsiMeetViewReference jitsiMeetViewReference) {
-        mJitsiMeetViewReference = jitsiMeetViewReference;
-        mReactContext = reactContext;
-    }
+  public RNJitsiMeetViewManager(ReactApplicationContext reactContext, IRNJitsiMeetViewReference jitsiMeetViewReference) {
+    mJitsiMeetViewReference = jitsiMeetViewReference;
+    mReactContext = reactContext;
+  }
 
-    @Override
-    public String getName() {
-        return REACT_CLASS;
-    }
+  @Override
+  public String getName() {
+    return REACT_CLASS;
+  }
 
-    @Override
-    public RNJitsiMeetView createViewInstance(ThemedReactContext context) {
-        if (mJitsiMeetViewReference.getJitsiMeetView() == null) {
-            RNJitsiMeetView view = new RNJitsiMeetView(context.getCurrentActivity());
-            view.setListener(this);
-            mJitsiMeetViewReference.setJitsiMeetView(view);
-        }
-        return mJitsiMeetViewReference.getJitsiMeetView();
+  @Override
+  public RNJitsiMeetView createViewInstance(ThemedReactContext context) {
+    if (mJitsiMeetViewReference.getJitsiMeetView() == null) {
+      RNJitsiMeetView view = new RNJitsiMeetView(context.getCurrentActivity());
+      view.setListener(this);
+      mJitsiMeetViewReference.setJitsiMeetView(view);
     }
+    return mJitsiMeetViewReference.getJitsiMeetView();
+  }
 
-    public void onConferenceJoined(Map<String, Object> data) {
-        WritableMap event = Arguments.createMap();
-        event.putString("url", (String) data.get("url"));
-        mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                mJitsiMeetViewReference.getJitsiMeetView().getId(),
-                "conferenceJoined",
-                event);
-    }
+  public void onConferenceJoined(Map<String, Object> data) {
+    WritableMap event = Arguments.createMap();
+    event.putString("url", (String) data.get("url"));
+    mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+      mJitsiMeetViewReference.getJitsiMeetView().getId(),
+      "conferenceJoined",
+      event);
+  }
 
-    public void onConferenceTerminated(Map<String, Object> data) {
-        WritableMap event = Arguments.createMap();
-        event.putString("url", (String) data.get("url"));
-        event.putString("error", (String) data.get("error"));
-        mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                mJitsiMeetViewReference.getJitsiMeetView().getId(),
-                "conferenceTerminated",
-                event);
-    }
+  public void onConferenceTerminated(Map<String, Object> data) {
+    WritableMap event = Arguments.createMap();
+    event.putString("url", (String) data.get("url"));
+    event.putString("error", (String) data.get("error"));
+    mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+      mJitsiMeetViewReference.getJitsiMeetView().getId(),
+      "conferenceTerminated",
+      event);
+  }
 
-    public void onConferenceWillJoin(Map<String, Object> data) {
-        WritableMap event = Arguments.createMap();
-        event.putString("url", (String) data.get("url"));
-        mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                mJitsiMeetViewReference.getJitsiMeetView().getId(),
-                "conferenceWillJoin",
-                event);
-    }
+  public void onConferenceWillJoin(Map<String, Object> data) {
+    WritableMap event = Arguments.createMap();
+    event.putString("url", (String) data.get("url"));
+    mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+      mJitsiMeetViewReference.getJitsiMeetView().getId(),
+      "conferenceWillJoin",
+      event);
+  }
 
-    public Map getExportedCustomBubblingEventTypeConstants() {
-        return MapBuilder.builder()
-                .put("conferenceJoined", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceJoined")))
-                .put("conferenceTerminated", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceTerminated")))
-                .put("conferenceWillJoin", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceWillJoin")))
-                .build();
-    }
+  public Map getExportedCustomBubblingEventTypeConstants() {
+    return MapBuilder.builder()
+      .put("conferenceJoined", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceJoined")))
+      .put("conferenceTerminated", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceTerminated")))
+      .put("conferenceWillJoin", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceWillJoin")))
+      .build();
+  }
 }

@@ -1,7 +1,7 @@
 package com.reactnativejitsimeet;
 
 public interface IRNJitsiMeetViewReference {
-    public void setJitsiMeetView(RNJitsiMeetView jitsiMeetView);
+  public void setJitsiMeetView(RNJitsiMeetView jitsiMeetView);
 
-    public RNJitsiMeetView getJitsiMeetView();
+  public RNJitsiMeetView getJitsiMeetView();
 }
