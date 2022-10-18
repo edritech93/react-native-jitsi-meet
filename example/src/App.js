@@ -14,7 +14,7 @@ export default function App() {
       /* Você também pode usar o JitsiMeet.audioCall (url) para chamadas apenas de áudio */
       /* Você pode terminar programaticamente a chamada com JitsiMeet.endCall () */
     }, 1000);
-  }, [])
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -24,28 +24,28 @@ export default function App() {
 
   function onConferenceTerminated(nativeEvent) {
     /* Conference terminated event */
-    console.log(nativeEvent)
+    console.log(nativeEvent);
   }
 
   function onConferenceJoined(nativeEvent) {
     /* Conference joined event */
-    console.log(nativeEvent)
+    console.log(nativeEvent);
   }
 
   function onConferenceWillJoin(nativeEvent) {
     /* Conference will join event */
-    console.log(nativeEvent)
+    console.log(nativeEvent);
   }
   return (
     <JitsiMeetView
-      onConferenceTerminated={e => onConferenceTerminated(e)}
-      onConferenceJoined={e => onConferenceJoined(e)}
-      onConferenceWillJoin={e => onConferenceWillJoin(e)}
+      onConferenceTerminated={(e) => onConferenceTerminated(e)}
+      onConferenceJoined={(e) => onConferenceJoined(e)}
+      onConferenceWillJoin={(e) => onConferenceWillJoin(e)}
       style={{
         flex: 1,
         height: '100%',
         width: '100%',
       }}
     />
-  )
+  );
 }
