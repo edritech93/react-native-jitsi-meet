@@ -129,7 +129,8 @@ repositories {
 dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"  // From node_modules
-  implementation('org.jitsi.react:jitsi-meet-sdk:6.1.0') {transitive = true}
+//  implementation('org.jitsi.react:jitsi-meet-sdk:6.1.0') {transitive = true}
+  implementation ('org.jitsi.react:jitsi-meet-sdk:+') { transitive = true }
 }
 
 if (isNewArchitectureEnabled()) {

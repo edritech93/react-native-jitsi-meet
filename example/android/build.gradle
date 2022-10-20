@@ -49,5 +49,7 @@ allprojects {
         }
         google()
         maven { url 'https://www.jitpack.io' }
+        // NOTE: other repo
+        maven {url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"}
     }
 }
