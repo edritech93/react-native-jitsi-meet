@@ -2,22 +2,18 @@ package com.reactnativejitsimeet;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
+import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
-import com.facebook.react.module.annotations.ReactModule;
-
-import org.jitsi.meet.sdk.JitsiMeetViewListener;
 
 import java.util.Map;
 
-import static java.security.AccessController.getContext;
-
 @ReactModule(name = RNJitsiMeetViewManager.REACT_CLASS)
-public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> implements JitsiMeetViewListener {
+public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView>  {
   public static final String REACT_CLASS = "RNJitsiMeetView";
   private IRNJitsiMeetViewReference mJitsiMeetViewReference;
   private ReactApplicationContext mReactContext;
@@ -36,12 +32,12 @@ public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> i
   public RNJitsiMeetView createViewInstance(ThemedReactContext context) {
     if (mJitsiMeetViewReference.getJitsiMeetView() == null) {
       RNJitsiMeetView view = new RNJitsiMeetView(context.getCurrentActivity());
-      view.setListener(this);
       mJitsiMeetViewReference.setJitsiMeetView(view);
     }
     return mJitsiMeetViewReference.getJitsiMeetView();
   }
 
+  @ReactProp(name = "onConferenceJoined")
   public void onConferenceJoined(Map<String, Object> data) {
     WritableMap event = Arguments.createMap();
     event.putString("url", (String) data.get("url"));
@@ -51,6 +47,7 @@ public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> i
       event);
   }
 
+  @ReactProp(name = "onConferenceTerminated")
   public void onConferenceTerminated(Map<String, Object> data) {
     WritableMap event = Arguments.createMap();
     event.putString("url", (String) data.get("url"));
@@ -61,6 +58,7 @@ public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView> i
       event);
   }
 
+  @ReactProp(name = "onConferenceWillJoin")
   public void onConferenceWillJoin(Map<String, Object> data) {
     WritableMap event = Arguments.createMap();
     event.putString("url", (String) data.get("url"));
