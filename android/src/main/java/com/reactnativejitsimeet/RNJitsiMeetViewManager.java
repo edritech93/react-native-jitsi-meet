@@ -37,42 +37,42 @@ public class RNJitsiMeetViewManager extends SimpleViewManager<RNJitsiMeetView>  
     return mJitsiMeetViewReference.getJitsiMeetView();
   }
 
-  @ReactProp(name = "onConferenceJoined")
-  public void onConferenceJoined(Map<String, Object> data) {
-    WritableMap event = Arguments.createMap();
-    event.putString("url", (String) data.get("url"));
-    mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-      mJitsiMeetViewReference.getJitsiMeetView().getId(),
-      "conferenceJoined",
-      event);
-  }
-
-  @ReactProp(name = "onConferenceTerminated")
-  public void onConferenceTerminated(Map<String, Object> data) {
-    WritableMap event = Arguments.createMap();
-    event.putString("url", (String) data.get("url"));
-    event.putString("error", (String) data.get("error"));
-    mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-      mJitsiMeetViewReference.getJitsiMeetView().getId(),
-      "conferenceTerminated",
-      event);
-  }
-
-  @ReactProp(name = "onConferenceWillJoin")
-  public void onConferenceWillJoin(Map<String, Object> data) {
-    WritableMap event = Arguments.createMap();
-    event.putString("url", (String) data.get("url"));
-    mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-      mJitsiMeetViewReference.getJitsiMeetView().getId(),
-      "conferenceWillJoin",
-      event);
-  }
-
-  public Map getExportedCustomBubblingEventTypeConstants() {
-    return MapBuilder.builder()
-      .put("conferenceJoined", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceJoined")))
-      .put("conferenceTerminated", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceTerminated")))
-      .put("conferenceWillJoin", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceWillJoin")))
-      .build();
-  }
+//  @ReactProp(name = "onConferenceJoined")
+//  public void onConferenceJoined(Map<String, Object> data) {
+//    WritableMap event = Arguments.createMap();
+//    event.putString("url", (String) data.get("url"));
+//    mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+//      mJitsiMeetViewReference.getJitsiMeetView().getId(),
+//      "conferenceJoined",
+//      event);
+//  }
+//
+//  @ReactProp(name = "onConferenceTerminated")
+//  public void onConferenceTerminated(Map<String, Object> data) {
+//    WritableMap event = Arguments.createMap();
+//    event.putString("url", (String) data.get("url"));
+//    event.putString("error", (String) data.get("error"));
+//    mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+//      mJitsiMeetViewReference.getJitsiMeetView().getId(),
+//      "conferenceTerminated",
+//      event);
+//  }
+//
+//  @ReactProp(name = "onConferenceWillJoin")
+//  public void onConferenceWillJoin(Map<String, Object> data) {
+//    WritableMap event = Arguments.createMap();
+//    event.putString("url", (String) data.get("url"));
+//    mReactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+//      mJitsiMeetViewReference.getJitsiMeetView().getId(),
+//      "conferenceWillJoin",
+//      event);
+//  }
+//
+//  public Map getExportedCustomBubblingEventTypeConstants() {
+//    return MapBuilder.builder()
+//      .put("conferenceJoined", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceJoined")))
+//      .put("conferenceTerminated", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceTerminated")))
+//      .put("conferenceWillJoin", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onConferenceWillJoin")))
+//      .build();
+//  }
 }
